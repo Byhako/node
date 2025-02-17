@@ -6,23 +6,25 @@ app.disable('x-powered-by')
 
 const PORT = 4000
 
-app.use((req, res, next) => {
-  console.log('Middleware')
-  if (req.method !== 'POST') return next()
+// app.use((req, res, next) => {
+//   console.log('Middleware')
+//   if (req.method !== 'POST') return next()
 
-  let body = ''
+//   let body = ''
 
-  req.on('data', (chunk) => {
-    body += chunk.toString()
-  })
+//   req.on('data', (chunk) => {
+//     body += chunk.toString()
+//   })
 
-  req.on('end', () => {
-    const data = JSON.parse(body)
-    // Mutar la respuesta agregando data en el body
-    req.body = data
-    next()
-  })
-})
+//   req.on('end', () => {
+//     const data = JSON.parse(body)
+//     // Mutar la respuesta agregando data en el body
+//     req.body = data
+//     next()
+//   })
+// })
+
+app.use(express.json()) // Parsea el body de la petición
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to my website!')
